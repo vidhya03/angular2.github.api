@@ -28,7 +28,7 @@
 <div class="container">
 
 
-  <template [ngIf]="selectedUser.id">
+  <ng-template [ngIf]="selectedUser.id">
     <ol class="breadcrumb">
       <li><a (click)="go('home')">Home</a></li>
       <li class="active">{{selectedUser.login}}</li>
@@ -48,7 +48,7 @@
     </div>
     <hr/>
     <h2><span *ngIf="loadingFollowers">Followers loading...</span><span *ngIf="!loadingFollowers">Followers</span></h2>
-    <template [ngIf]="selectedUser.followers">
+    <ng-template [ngIf]="selectedUser.followers">
       <div class="row">
         <div *ngFor="let follower of selectedUser.followers" class="col-xs-6 col-md-2">
 
@@ -64,16 +64,16 @@
         </div>
       </div>
 
-    </template>
+    </ng-template>
 
 
-  </template>
+  </ng-template>
 
 
   <!-- Example row of columns -->
   <div class="row">
 
-    <template [ngIf]="!selectedUser.id">
+    <ng-template [ngIf]="!selectedUser.id">
       <div *ngFor="let user of users" class="col-xs-6 col-md-2">
 
         <div class="thumbnail">
@@ -86,7 +86,7 @@
           </div>
         </div>
       </div>
-    </template>
+    </ng-template>
 
 
   </div>

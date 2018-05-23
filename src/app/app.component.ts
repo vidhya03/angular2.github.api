@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "./models/user";
-import {UserService} from "./services/user.service";
-import {Subject} from "rxjs";
+import {User} from './models/user';
+import {UserService} from './services/user.service';
+import {Subject} from 'rxjs';
+// import 'rxjs/Rx';
 
 @Component({
     selector: 'app-root',
@@ -9,7 +10,7 @@ import {Subject} from "rxjs";
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    title = 'Welcome to Github';
+    title = 'Welcome to Vidhya\'s first migration app';
 
 
     cache = {
@@ -20,12 +21,14 @@ export class AppComponent implements OnInit {
     users: User[] = [];
     search: Subject<string> = new Subject<string>();
     selectedUser: User = new User();
-    loadingFollowers: boolean = false;
+    loadingFollowers: boolean | undefined;
 
 
     constructor(private userService: UserService) {
 
-        this.search.debounceTime(200).distinctUntilChanged().subscribe((searchTerm) => {
+        this.loadingFollowers = false;
+        // this.search.debounceTime(200).distinctUntilChanged().subscribe((searchTerm) => {
+        this.search.subscribe((searchTerm) => {
 
             // call to user service and search by query
 
@@ -56,10 +59,10 @@ export class AppComponent implements OnInit {
      */
     onSearch(q: string) {
 
-        if (q !== "") {
+        if (q !== '') {
             this.search.next(q);
         } else {
-            //if empty search box we restore first users
+            // if empty search box we restore first users
             this.users = this.cache.users;
         }
 
@@ -67,7 +70,7 @@ export class AppComponent implements OnInit {
 
     go(s: string) {
 
-        if (s == 'home') {
+        if (s === 'home') {
 
             this.selectedUser = new User();
             this.users = this.cache.users;
@@ -121,8 +124,8 @@ export class AppComponent implements OnInit {
      */
     findUserInCache(user: User): User {
 
-        for (var i = 0; i < this.cache.selectedUser.length; i++) {
-            if (this.cache.selectedUser[i].login == user.login) {
+        for (let i = 0; i < this.cache.selectedUser.length; i++) {
+            if (this.cache.selectedUser[i].login === user.login) {
                 return this.cache.selectedUser[i];
             }
         }
